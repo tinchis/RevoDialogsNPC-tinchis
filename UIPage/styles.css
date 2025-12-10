@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@font-face {font-family: 'BebasKai'; src: url('https://raw.githubusercontent.com/Juliroo/CreativeTeam/refs/heads/main/fonts/BebasKai.otf')}
+@font-face {font-family: 'AlienEnergy'; src: url('https://raw.githubusercontent.com/Juliroo/CreativeTeam/refs/heads/main/fonts/AlienEnergy.otf')}
+
+@layer utilities {
+    .font-nunito {
+        font-family: "Nunito", sans-serif;
+    }
+    .font-bebaskai {
+        font-family: "BebasKai", sans-serif;
+    }
+    .font-alienenergy {
+        font-family: "AlienEnergy", sans-serif;
+    }
+    .shadow-text-black {
+        text-shadow: 0 0 1vh black;
+    }
+}
+
+.name {
+    font-family: 'AlienEnergy';
+    text-shadow: 0 0 1vh #036749bf;
+    background: -webkit-linear-gradient(#0DC58D, #0BC8CC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.name small {
+    text-shadow: 0 0 1vh #036749bf;
+    background: -webkit-linear-gradient(#0DC58D, #0BC8CC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+i {
+    text-shadow: 0 0 1vh #036749bf;
+    background: -webkit-linear-gradient(#0DC58D, #0BC8CC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.button i {
+    margin-right: .9vh;
+}
+
+.menu::after {
+    position: absolute;
+    content: "";
+    inset: 0;
+    z-index: -1;
+    background: rgba(8, 8, 8, 0.75);
+    filter: blur(.25vh);
+    border-radius: .5vh;
+}
+
+.close {
+    animation: fadeOutRight .75s;
+}
