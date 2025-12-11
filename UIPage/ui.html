@@ -87,14 +87,26 @@
         .onExit {
             animation: fadeOutRight 0.4s cubic-bezier(0.6, 0, 0.8, 0.2) forwards !important;
         }
+
+        #game-view {
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        #game-view.active {
+            visibility: visible;
+        }
     </style>
 </head>
 
 <body class="bg-transparent overflow-hidden">
+    <object id="game-view" type="application/x-cfx-game-view"
+        style="position:fixed; inset:0; width:100%; height:100%; z-index:-9999; pointer-events:none;">
+    </object>
     <div id="container" class="hidden fixed bottom-[2vh] right-[1vw] h-auto w-[22vw] rounded-xl overflow-hidden border border-[#333333] 
         bg-black/20 backdrop-blur-lg supports-[backdrop-filter]:bg-black/20 supports-[backdrop-filter]:backdrop-blur-xl
         z-10">
-        <div class="flex flex-col gap-2 title bg-[#1D1D1D] flex flex-row justify-between px-5 py-[17px] border-b border-[#333333]"
+        <div class="flex flex-col gap-2 title bg-[#1D1D1D] backdrop-blur-lg flex flex-row justify-between px-5 py-[17px] border-b border-[#333333]"
             style="background-image: url('svgs/grid-pattern.svg'); background-size: cover; background-position: center; background-color: #1d1d1d4f;">
             <div class="flex items-center justify-between">
                 <div id="title"

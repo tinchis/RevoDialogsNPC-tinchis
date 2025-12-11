@@ -70,6 +70,8 @@ window.addEventListener('message', function (event) {
         appendSound.currentTime = 0;
         appendSound.play();
 
+        $('#game-view').addClass('active');
+
         options = item.options;
         $('#dialog').html(item.dialog);
         $('#title').html(item.name);
@@ -119,6 +121,7 @@ window.addEventListener('message', function (event) {
                     name: item.name,
                 }));
 
+                $('#game-view').removeClass('active');
                 $('#container').addClass('onExit');
                 setTimeout(() => {
                     $('#container').addClass('hidden');
@@ -170,6 +173,7 @@ $(document).on('mouseenter', '.button', function () {
 
 window.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
+        $('#game-view').removeClass('active');
         $('#container').addClass('onExit');
         setTimeout(() => {
             $('#container').addClass('hidden');
