@@ -38,6 +38,10 @@
             border-radius: .5vh;
         }
 
+        body {
+            display: none;
+        }
+
         #container::after {
             position: absolute;
             content: "";
@@ -46,6 +50,10 @@
             background: rgba(8, 8, 8, 0.75);
             filter: blur(.25vh);
             border-radius: .5vh;
+        }
+
+        #container.hidden {
+            display: none !important;
         }
 
         @keyframes fadeInUp {

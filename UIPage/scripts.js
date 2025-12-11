@@ -122,10 +122,12 @@ window.addEventListener('message', function (event) {
                 $('#container').addClass('onExit');
                 setTimeout(() => {
                     $('#container').addClass('hidden');
+                    $('body').fadeOut();
                 }, 400);
             });
         }
 
+        $('body').fadeIn();
         $('#container').removeClass('onExit').removeClass('hidden');
     }
 });
@@ -171,6 +173,7 @@ window.addEventListener("keydown", (event) => {
         $('#container').addClass('onExit');
         setTimeout(() => {
             $('#container').addClass('hidden');
+            $('body').fadeOut();
         }, 400);
         $.post('https://RevoDialogsNPC/action', JSON.stringify({
             action: "close",
