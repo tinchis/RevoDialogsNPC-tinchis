@@ -1,33 +1,151 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="styles.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css">
-  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            padding: 0;
+            margin: 0;
+            font-weight: 300;
+            user-select: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: .3vw;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0);
+            border-radius: .5vh;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #17171700;
+            border-radius: .5vh;
+        }
+
+        /* Container Background Effect */
+        #container::after {
+            position: absolute;
+            content: "";
+            inset: 0;
+            z-index: -1;
+            background: rgba(8, 8, 8, 0.75);
+            filter: blur(.25vh);
+            border-radius: .5vh;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes fadeOutRight {
+            from {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateX(100px) scale(0.95);
+            }
+        }
+
+        #container {
+            animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .onExit {
+            animation: fadeOutRight 0.4s cubic-bezier(0.6, 0, 0.8, 0.2) forwards !important;
+        }
+
+        /* Icon Effects */
+        .click {
+            color: #38DAAF !important;
+            text-shadow: 0 0 .15vh #38DAAF !important;
+        }
+
+        .scroll {
+            color: #38DAAF !important;
+            text-shadow: 0 0 .15vh #38DAAF !important;
+        }
+    </style>
 </head>
-<body class="bg-transparent font-nunito select-none hidden outline-none">
-  <div class="fixed flex items-center w-full h-full">
-    <div class="menu absolute w-[21vw] p-[1vh] animate__animated animate__fadeInRight right-[2vw]">
-      <div class="flex flex-row justify-between mb-[1.25vh] items-center">
-        <div class="name relative h-max m-0 flex flex-row text-[2.1vh] tracking-[2px] font-thin"><span id="name"><small class="text-[2.1vh]">Gabriel</small> Mitchell</span></div>
-        <div class="esc_button py-[0.35vh] px-[0.2vw] pr-[0.4vw] rounded-[4vh] text-white/42 bg-[rgba(211,211,211,0.075)] shadow-text-black border-[0.175vh] border-white/5 text-[1vh] cursor-pointer"><span class="bg-[rgba(200,200,200,0.2)] py-[0.2vh] px-[0.3vw] text-white rounded-[5vh] mr-[0.15vw] font-bebaskai">ESC</span> Salir</div>
-      </div>
-      <div class="flex justify-center items-center w-full bg-[rgba(168,168,168,0.1)] border-[0.1vh] border-[rgb(44,44,44)] text-white text-[1.75vh] rounded-[0.25vh] py-[1.25vh] tracking-[0.05vw] font-bebaskai"><div><span id="dialog"></span></div></div>
-      <div>
-        <div class="p-[0.5vh] mt-[1vh] flex flex-col gap-[0.5vh] rounded-[0.4vh] bg-white/[0.025]">
-          <button type="button" id="option0" class="button text-left font-medium text-[1.4vh] py-[0.65vh] px-[0.5vw] rounded-[0.25vh] bg-[rgba(233,233,233,0.075)] border-none text-[rgb(190,190,190)] relative transition-all duration-300 w-full cursor-pointer outline-none hover:bg-white/10 hover:text-white font-nunito"></button>
-          <button type="button" id="option1" class="button text-left font-medium text-[1.4vh] py-[0.65vh] px-[0.5vw] rounded-[0.25vh] bg-[rgba(233,233,233,0.075)] border-none text-[rgb(190,190,190)] relative transition-all duration-300 w-full cursor-pointer outline-none hover:bg-white/10 hover:text-white font-nunito"></button>
-          <button type="button" id="option2" class="button text-left font-medium text-[1.4vh] py-[0.65vh] px-[0.5vw] rounded-[0.25vh] bg-[rgba(233,233,233,0.075)] border-none text-[rgb(190,190,190)] relative transition-all duration-300 w-full cursor-pointer outline-none hover:bg-white/10 hover:text-white font-nunito"></button>
-          <button type="button" id="option3" class="button text-left font-medium text-[1.4vh] py-[0.65vh] px-[0.5vw] rounded-[0.25vh] bg-[rgba(233,233,233,0.075)] border-none text-[rgb(190,190,190)] relative transition-all duration-300 w-full cursor-pointer outline-none hover:bg-white/10 hover:text-white font-nunito"></button>
-          <button type="button" id="option4" class="button text-left font-medium text-[1.4vh] py-[0.65vh] px-[0.5vw] rounded-[0.25vh] bg-[rgba(233,233,233,0.075)] border-none text-[rgb(190,190,190)] relative transition-all duration-300 w-full cursor-pointer outline-none hover:bg-white/10 hover:text-white font-nunito"></button>
-          <button type="button" id="option5" class="button text-left font-medium text-[1.4vh] py-[0.65vh] px-[0.5vw] rounded-[0.25vh] bg-[rgba(233,233,233,0.075)] border-none text-[rgb(190,190,190)] relative transition-all duration-300 w-full cursor-pointer outline-none hover:bg-white/10 hover:text-white font-nunito"></button>
-        </div>
-      </div>
+
+<body class="bg-transparent overflow-hidden">
+    <div id="debug-background"
+        style="position:fixed; inset:0; width:100%; height:100%; z-index:0; background-image: url('imgs/bgTest.png'); background-size: cover; background-position: center; background-repeat: no-repeat; display: none;">
     </div>
-  </div>  
-  <script src="scripts.js" type="text/javascript"></script>
+    <object id="game-view" type="application/x-cfx-game-view"
+        style="position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; display: block;">
+    </object>
+    <div id="container" class="hidden fixed bottom-[2vh] right-[1vw] h-auto w-[15vw] rounded-xl overflow-hidden border border-[#333333] 
+        bg-black/20 backdrop-blur-lg supports-[backdrop-filter]:bg-black/20 supports-[backdrop-filter]:backdrop-blur-xl
+        z-10">
+        <div class="flex flex-col gap-2 title bg-[#1D1D1D] flex flex-row justify-between px-5 py-[17px] border-b border-[#333333]"
+            style="background-image: url('svgs/grid-pattern.svg'); background-size: cover; background-position: center; background-color: #1d1d1d4f;">
+            <div class="flex items-center justify-between">
+                <div id="title"
+                    class="text-[#AEAEAE] font-[500] text-md tracking-tight uppercase w-auto font-['IBM_Plex_Mono'] tracking-[2px] flex items-center">
+                </div>
+                <p class="text-white bg-[#16978B] rounded-full px-3 py-1 font-['IBM_Plex_Mono'] uppercase text-xs">NPC
+                </p>
+            </div>
+            <div id="dialog" class="text-white/50 text-sm font-['IBM_Plex_Mono']">
+            </div>
+        </div>
+        <div id="buttons"
+            class="bg-[#1d1d1d4f] backdrop-blur-lg max-h-[40vh] w-[22vw] overflow-x-hidden overflow-y-auto">
+        </div>
+        <div class="flex items-center gap-4 bg-[#1D1D1D] px-6 py-4 border-t border-[#333333] backdrop-blur-lg"
+            style="background-image: url('svgs/grid-pattern.svg'); background-size: cover; background-position: center; background-color: #1d1d1d4f;">
+            <div class="flex items-center gap-1.5">
+                <p class="text-[#9E9E9E] font-medium text-xs font-['IBM_Plex_Mono']">
+                    Desplazar
+                </p>
+                <div
+                    class="scroll-option bg-[#3B3B3B] border border-[#595959] p-1.5 rounded-md transition-all duration-200">
+                    <img src="svgs/ArrowBottom.svg" alt="Arrow Bottom" class="w-2.5 h-2.5">
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5">
+                <p class="text-[#9E9E9E] font-medium text-xs font-['IBM_Plex_Mono']">
+                    Seleccionar
+                </p>
+                <div
+                    class="select-option bg-[#3B3B3B] border border-[#595959] p-1.5 rounded-md transition-all duration-200">
+                    <img src="svgs/Enter.svg" alt="Arrow Bottom" class="w-2.5 h-2.5">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js" type="text/javascript"></script>
 </body>
+
 </html>

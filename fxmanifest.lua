@@ -26,5 +26,6 @@ server_script 'Lua/SMain.lua'
 lua54 'yes'
 files {
 	'UIPage/*.*',
-	'UIPage/fonts/*.*'
+	'UIPage/fonts/*.*',
+	'UIPage/svgs/*.*'
 }

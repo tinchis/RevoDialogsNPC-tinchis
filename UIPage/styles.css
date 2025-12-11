@@ -1,48 +1,208 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 
-@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
-@font-face {font-family: 'BebasKai'; src: url('https://raw.githubusercontent.com/Juliroo/CreativeTeam/refs/heads/main/fonts/BebasKai.otf')}
-@font-face {font-family: 'AlienEnergy'; src: url('https://raw.githubusercontent.com/Juliroo/CreativeTeam/refs/heads/main/fonts/AlienEnergy.otf')}
+/* Base Styles */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+}
 
-@layer utilities {
-    .font-nunito {
-        font-family: "Nunito", sans-serif;
+/* Font Faces */
+@font-face {
+    font-family: 'BebasKai';
+    src: url('https://raw.githubusercontent.com/Juliroo/CreativeTeam/refs/heads/main/fonts/BebasKai.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'AlienEnergy';
+    src: url('https://raw.githubusercontent.com/Juliroo/CreativeTeam/refs/heads/main/fonts/AlienEnergy.otf') format('opentype');
+}
+
+/* Tailwind Layers */
+@layer base {
+    body {
+        @apply bg-transparent font-sans text-white overflow-hidden;
     }
-    .font-bebaskai {
-        font-family: "BebasKai", sans-serif;
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        @apply w-1;
     }
-    .font-alienenergy {
-        font-family: "AlienEnergy", sans-serif;
+    
+    ::-webkit-scrollbar-track {
+        @apply bg-transparent rounded;
     }
-    .shadow-text-black {
-        text-shadow: 0 0 1vh black;
+    
+    ::-webkit-scrollbar-thumb {
+        @apply bg-gray-600/50 rounded hover:bg-gray-500/50 transition-colors;
     }
 }
 
+/* Utility Classes */
+@layer utilities {
+    .font-bebaskai {
+        font-family: 'BebasKai', sans-serif;
+    }
+    
+    .font-alienenergy {
+        font-family: 'AlienEnergy', sans-serif;
+    }
+    
+    .shadow-text-black {
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    }
+    
+    .blur-bg {
+        @apply bg-black/30 backdrop-blur-lg;
+    }
+}
+
+/* Dialog Styles */
+#container {
+    @apply rounded-xl border border-gray-800 shadow-2xl overflow-hidden transition-all duration-300;
+    min-width: 24rem;
+    max-width: 28rem;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Title Bar */
+.title {
+    @apply px-5 py-4 border-b border-gray-800 flex items-center justify-between;
+    background: linear-gradient(90deg, rgba(13, 17, 23, 0.9) 0%, rgba(22, 27, 34, 0.9) 100%);
+    position: relative;
+    z-index: 10;
+}
+
+.title::before {
+    content: '';
+    @apply absolute inset-0 -z-10 opacity-20;
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Dialog Content */
+#dialog {
+    @apply p-5 text-gray-200 text-sm leading-relaxed;
+    max-height: 20vh;
+    overflow-y: auto;
+}
+
+/* Buttons Container */
+#buttons {
+    @apply overflow-y-auto flex-1;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+/* Button Styles */
+.button {
+    @apply px-5 py-3 flex items-center gap-3 transition-colors duration-200 relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.button:last-child {
+    border-bottom: none;
+}
+
+.button .icon {
+    @apply w-10 h-10 rounded-md flex items-center justify-center text-gray-400 bg-gray-800/50 border border-gray-700 transition-colors duration-200 flex-shrink-0;
+}
+
+.button .header {
+    @apply text-sm font-medium text-white transition-colors duration-200;
+}
+
+.button .text {
+    @apply text-xs text-gray-400 mt-1;
+}
+
+/* Button Hover & Active States */
+.button:hover {
+    @apply bg-gray-800/50;
+}
+
+.button:hover .icon {
+    @apply text-white border-gray-600;
+}
+
+.button-selected {
+    @apply bg-gray-800/80;
+}
+
+.button-selected .icon {
+    @apply bg-green-900/20 border-green-500 text-green-400;
+}
+
+.button-selected .header {
+    @apply text-green-400;
+}
+
+/* Footer Controls */
+.footer-controls {
+    @apply px-5 py-3 flex items-center justify-between border-t border-gray-800 bg-gray-900/50;
+}
+
+.control-item {
+    @apply flex items-center gap-2 text-xs text-gray-400;
+}
+
+.control-key {
+    @apply px-2 py-1 bg-gray-800 rounded text-white text-xs font-mono;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(10px); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.2s ease-out forwards;
+}
+
+.animate-fade-out {
+    animation: fadeOut 0.2s ease-in forwards;
+}
+
+/* Name Gradient */
 .name {
-    font-family: 'AlienEnergy';
-    text-shadow: 0 0 1vh #036749bf;
-    background: -webkit-linear-gradient(#0DC58D, #0BC8CC);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    @apply font-alienenergy text-xl bg-clip-text text-transparent;
+    background-image: linear-gradient(90deg, #0DC58D, #0BC8CC);
+    text-shadow: 0 0 10px rgba(11, 200, 204, 0.3);
 }
 
 .name small {
-    text-shadow: 0 0 1vh #036749bf;
-    background: -webkit-linear-gradient(#0DC58D, #0BC8CC);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    @apply text-base;
+    background-image: inherit;
+    -webkit-background-clip: inherit;
+    background-clip: inherit;
+    text-shadow: inherit;
 }
 
+/* Icons */
 i {
-    text-shadow: 0 0 1vh #036749bf;
-    background: -webkit-linear-gradient(#0DC58D, #0BC8CC);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    @apply text-gray-400;
+    text-shadow: none;
+    background: none;
+    -webkit-text-fill-color: currentColor;
 }
 
-.button i {
-    margin-right: .9vh;
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #container {
+        @apply w-full max-w-none h-full max-h-none rounded-none border-0;
+    }
+    
+    #dialog {
+        max-height: 30vh;
+    }
 }
 
 .menu::after {
@@ -53,7 +213,6 @@ i {
     background: rgba(8, 8, 8, 0.75);
     filter: blur(.25vh);
     border-radius: .5vh;
-}
 
 .close {
     animation: fadeOutRight .75s;
