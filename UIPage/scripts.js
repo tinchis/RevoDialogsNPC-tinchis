@@ -100,21 +100,6 @@ window.addEventListener('message', function (event) {
                 selectSound.currentTime = 0;
                 selectSound.play();
 
-                const selectIcon = $('.select-option');
-                if (selectIcon.length) {
-                    selectIcon.css({
-                        'background': '#16978B',
-                        'border-color': '#16978B'
-                    });
-
-                    setTimeout(() => {
-                        selectIcon.css({
-                            'background': '',
-                            'border-color': ''
-                        });
-                    }, 250);
-                }
-
                 $.post('https://RevoDialogsNPC/action', JSON.stringify({
                     action: "option",
                     options: options[i],
@@ -165,6 +150,31 @@ $(document).on('mouseenter', '.button', function () {
                 'border-color': ''
             });
         }, 250);
+    }
+
+    const selectIcon = $('.select-option');
+    if (selectIcon.length) {
+        selectIcon.css({
+            'background': '#16978B',
+            'border-color': '#16978B'
+        });
+
+        setTimeout(() => {
+            selectIcon.css({
+                'background': '',
+                'border-color': ''
+            });
+        }, 250);
+    }
+});
+
+$(document).on('mouseleave', '.button', function () {
+    const selectIcon = $('.select-option');
+    if (selectIcon.length) {
+        selectIcon.css({
+            'background': '',
+            'border-color': ''
+        });
     }
 });
 
