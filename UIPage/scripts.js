@@ -123,9 +123,7 @@ window.addEventListener('message', function (event) {
 
                 $('#container').addClass('hidden');
                 $('body').hide();
-                setTimeout(() => {
-                    $('#game-view').removeClass('active');
-                }, 800);
+                $('#game-view').removeClass('active');
             });
         }
 
@@ -174,9 +172,7 @@ window.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
         $('#container').addClass('hidden');
         $('body').hide();
-        setTimeout(() => {
-            $('#game-view').removeClass('active');
-        }, 800);
+        $('#game-view').removeClass('active');
         $.post('https://RevoDialogsNPC/action', JSON.stringify({
             action: "close",
         }));
