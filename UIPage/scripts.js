@@ -169,6 +169,14 @@ $(document).on('mouseenter', '.button', function () {
 });
 
 $(document).on('mouseleave', '.button', function () {
+    $(this).find('.square').css({
+        'background-color': '#626262',
+        'transform': 'rotate(45deg)'
+    });
+    $(this).find('.header').css({
+        'color': '#626262'
+    });
+
     const selectIcon = $('.select-option');
     if (selectIcon.length) {
         selectIcon.css({
