@@ -121,19 +121,16 @@ window.addEventListener('message', function (event) {
                     name: item.name,
                 }));
 
-                $('#container').addClass('onExit');
-                setTimeout(() => {
-                    $('#container').addClass('hidden');
-                    $('body').fadeOut();
-                }, 400);
+                $('#container').addClass('hidden');
+                $('body').hide();
                 setTimeout(() => {
                     $('#game-view').removeClass('active');
                 }, 800);
             });
         }
 
-        $('body').fadeIn();
-        $('#container').removeClass('onExit').removeClass('hidden');
+        $('body').show();
+        $('#container').removeClass('hidden');
     }
 });
 
@@ -175,11 +172,8 @@ $(document).on('mouseenter', '.button', function () {
 
 window.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
-        $('#container').addClass('onExit');
-        setTimeout(() => {
-            $('#container').addClass('hidden');
-            $('body').fadeOut();
-        }, 400);
+        $('#container').addClass('hidden');
+        $('body').hide();
         setTimeout(() => {
             $('#game-view').removeClass('active');
         }, 800);
